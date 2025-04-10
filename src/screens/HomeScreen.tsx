@@ -37,7 +37,9 @@ const HomeScreen: React.FC = () => {
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
-      <TextInput testID="city-input"
+      <Text>Enter city name to get weather</Text>
+      <TextInput
+        testID="city-input"
         style={[
           styles.input,
           { backgroundColor: theme.card, color: theme.text },
@@ -46,16 +48,29 @@ const HomeScreen: React.FC = () => {
         placeholderTextColor={theme.text}
         onChangeText={setCity}
       />
-      <Button testID="btnWeather" title="Get Weather" onPress={handleSearch} color={theme.button} />
+      <Button
+        testID="btnWeather"
+        title="Get Weather"
+        onPress={handleSearch}
+        color={theme.button}
+      />
       <View style={styles.switchContainer}>
-      <Text testID = "mode" style={[styles.label, { color: theme.text }]}>Dark Mode</Text>
-      <Switch  testID = "Switch" onValueChange={toggleTheme} value={theme === darkTheme} />
-    </View>
+        <Text testID="mode" style={[styles.label, { color: theme.text }]}>
+          Dark Mode
+        </Text>
+        <Switch
+          testID="Switch"
+          onValueChange={toggleTheme}
+          value={theme === darkTheme}
+        />
+      </View>
 
       {loading && <ActivityIndicator size="large" />}
 
       {error ? (
-        <Text testID="error_text" style={[styles.error, { color: "red" }]}>{error}</Text>
+        <Text testID="error_text" style={[styles.error, { color: "red" }]}>
+          {error}
+        </Text>
       ) : (
         data && <WeatherCard weather={data} />
       )}

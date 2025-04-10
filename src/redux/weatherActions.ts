@@ -11,7 +11,7 @@ export const fetchWeather = createAsyncThunk<WeatherData, string, { rejectValue:
       await AsyncStorage.setItem("lastCity", city); // Save last searched city
       return data;
     } catch (error: any) {
-      return rejectWithValue(error.response?.data?.message || "City not found");
+      return rejectWithValue(error?.response?.data?.message || "City not found");
     }
   }
 );
