@@ -5,18 +5,19 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { fetchWeatherFromAPI } from "../services/weatherService";
 import { WeatherData, WeatherState } from "../types/Weather";
 
-export const fetchWeather = createAsyncThunk<WeatherData, string, { rejectValue: string }>(
-  "weather/fetchWeather",
-  async (city, { rejectWithValue }) => {
-    try {
-      const data = await fetchWeatherFromAPI(city);
-      await AsyncStorage.setItem("lastCity", city);
-      return data;
-    } catch (error: any) {
-      return rejectWithValue(error.response?.data?.message || "City not found");
-    }
+export const fetchWeather = createAsyncThunk<
+  WeatherData,
+  string,
+  { rejectValue: string }
+>("weather/fetchWeather", async (city, { rejectWithValue }) => {
+  try {
+    const data = await fetchWeatherFromAPI(city);
+    await AsyncStorage.setItem("lastCity", city);
+    return data;
+  } catch (error: any) {
+    return rejectWithValue(error?.message);
   }
-);
+});
 
 const initialState: WeatherState = {
   data: null,
@@ -30,17 +31,19 @@ const weatherSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchWeather.pending, (state) => {
+      .addCase(fetchWeather?.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchWeather.fulfilled, (state, action) => {
+      .addCase(fetchWeather?.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload;
+        state.error = null;
       })
-      .addCase(fetchWeather.rejected, (state, action) => {
+      .addCase(fetchWeather?.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload || "Something went wrong";
+        state.error =
+          action.payload || "Something went wrong. Please try again.";
       });
   },
 });

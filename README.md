@@ -27,11 +27,7 @@ With Metro running, open a new terminal window/pane from the root of your React 
 ### Android
 
 ```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
+npx react-native run-android
 ```
 
 ### iOS
@@ -53,11 +49,7 @@ bundle exec pod install
 For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
 
 ```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
+npx react-native run-android
 ```
 
 If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.

@@ -1,16 +1,27 @@
-// Description: This file contains the weather service that fetches weather data from an API.
 import axios from "axios";
 import { WeatherData } from "../types/Weather";
+import { API_KEY, BASE_URL, ICON_URL } from "./constants";
 
-const API_KEY = "2ac4270c99925f418740bf3ff4ea61dc";
-const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
-
-export const fetchWeatherFromAPI = async (city: string): Promise<WeatherData> => {
-  const response = await axios.get(`${BASE_URL}?q=${city}&appid=${API_KEY}&units=metric`);
-  return {
-    city: response.data.name,
-    temp: response.data.main.temp,
-    condition: response.data.weather[0].main,
-    icon: `http://openweathermap.org/img/w/${response.data.weather[0].icon}.png`,
-  };
+export const fetchWeatherFromAPI = async (
+  city: string
+): Promise<WeatherData> => {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}?q=${city}&appid=${API_KEY}&units=metric`
+    );
+    return {
+      city: response?.data?.name,
+      temp: response?.data?.main?.temp,
+      condition: response?.data?.weather[0]?.main,
+      icon: ICON_URL + `${response?.data?.weather[0]?.icon}.png`,
+    };
+  } catch (error: any) {
+    if (error.response) {
+      throw new Error(error?.response?.data?.message || "City not found");
+    } else if (error.request) {
+      throw new Error("Network error. Please try again.");
+    } else {
+      throw new Error("An unexpected error occurred.");
+    }
+  }
 };

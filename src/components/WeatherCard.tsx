@@ -22,7 +22,12 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ weather }) => {
 };
 
 const styles = StyleSheet.create({
-  card: { padding: 20, alignItems: "center", backgroundColor: "#fff", borderRadius: 10 },
+  card: {
+    padding: 20,
+    alignItems: "center",
+    backgroundColor: "#fff",
+    borderRadius: 10,
+  },
   city: { fontSize: 22, fontWeight: "bold" },
   temp: { fontSize: 26 },
   condition: { fontSize: 18 },
