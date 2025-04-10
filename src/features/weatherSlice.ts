@@ -8,8 +8,7 @@ import { WeatherData, WeatherState } from "../types/Weather";
 export const fetchWeather = createAsyncThunk<
   WeatherData,
   string,
-  { rejectValue: string }
->("weather/fetchWeather", async (city, { rejectWithValue }) => {
+  { rejectValue: string }>("weather/fetchWeather", async (city, { rejectWithValue }) => {
   try {
     const data = await fetchWeatherFromAPI(city);
     await AsyncStorage.setItem("lastCity", city);

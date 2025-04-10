@@ -13,10 +13,10 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ weather }) => {
 
   return (
     <View style={styles.card}>
-      <Text style={styles.city}>{weather.city}</Text>
-      <Text style={styles.temp}>{weather.temp}°C</Text>
-      <Text style={styles.condition}>{weather.condition}</Text>
-      <Image source={{ uri: weather.icon }} style={styles.icon} />
+      <Text testID="city" style={styles.city}>{weather.city}</Text>
+      <Text testID='temp' style={styles.temp}>{weather.temp}°C</Text>
+      <Text testID="condition" style={styles.condition}>{weather.condition}</Text>
+      <Image testID="image" source={{ uri: weather.icon }} style={styles.icon} />
     </View>
   );
 };

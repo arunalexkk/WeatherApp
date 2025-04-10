@@ -47,7 +47,10 @@ const HomeScreen: React.FC = () => {
         onChangeText={setCity}
       />
       <Button title="Get Weather" onPress={handleSearch} color={theme.button} />
+      <View style={styles.switchContainer}>
+      <Text style={[styles.label, { color: theme.text }]}>Dark Mode</Text>
       <Switch onValueChange={toggleTheme} value={theme === darkTheme} />
+    </View>
 
       {loading && <ActivityIndicator size="large" />}
 
@@ -64,6 +67,12 @@ const styles = StyleSheet.create({
   container: { flex: 1, justifyContent: "center", padding: 20 },
   input: { borderWidth: 1, padding: 10, marginVertical: 10, borderRadius: 5 },
   error: { marginTop: 10, fontSize: 16, fontWeight: "bold" },
+  switchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 10,
+  },
+  label: { marginRight: 10, fontSize: 16 },
 });
 
 export default HomeScreen;
