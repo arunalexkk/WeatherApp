@@ -1,6 +1,8 @@
 // This file defines the light and dark themes for the application.
 
+import React from "react";
 import { Appearance } from "react-native";
+
 
 export const lightTheme = {
   background: "#ffffff",
