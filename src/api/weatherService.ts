@@ -1,6 +1,7 @@
 import axiosClient from "./axiosClient";
 import { WeatherData } from "../types/Weather";
 import { ICON_URL } from "../utils/constants";
+import { handleApiError } from "../utils/handleApiError";
 
 export const getWeatherByCity = async (city: string): Promise<WeatherData> => {
   try {
@@ -17,12 +18,6 @@ export const getWeatherByCity = async (city: string): Promise<WeatherData> => {
       icon: `${ICON_URL}${data.weather[0].icon}.png`,
     };
   } catch (error: any) {
-    if (error.response) {
-      throw new Error(error.response.data.message || "City not found");
-    } else if (error.request) {
-      throw new Error("Network error. Please try again.");
-    } else {
-      throw new Error("An unexpected error occurred.");
-    }
+    throw new Error(handleApiError(error));
   }
 };

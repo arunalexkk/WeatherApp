@@ -13,7 +13,7 @@ import {
   SafeAreaView,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchWeather } from "../redux/weatherActions";
+import { fetchWeather } from "../redux/slices/weather/weatherActions";
 import { RootState, AppDispatch } from "../redux/store";
 import WeatherCard from "../components/WeatherCard";
 import { ThemeContext } from "../context/ThemeContext";
