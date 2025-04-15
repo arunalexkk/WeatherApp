@@ -1,3 +1,4 @@
+// This function handles API errors and returns a user-friendly error message.
 export const handleApiError = (error: any): string => {
     if (error.response?.data?.message) {
       return error?.response?.data?.message;

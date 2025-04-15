@@ -1,11 +1,11 @@
-import axiosClient from "./axiosClient";
-import { WeatherData } from "../types/Weather";
-import { ICON_URL } from "../utils/constants";
-import { handleApiError } from "../utils/handleApiError";
+import axiosClient from './axiosClient';
+import { WeatherData } from '../types/Weather';
+import { ICON_URL } from '../utils/constants';
+import { handleApiError } from '../utils/handleApiError';
 
 export const getWeatherByCity = async (city: string): Promise<WeatherData> => {
   try {
-    const response = await axiosClient.get("/", {
+    const response = await axiosClient.get('/', {
       params: { q: city },
     });
 

@@ -17,7 +17,9 @@ describe('WeatherCard Component', () => {
     expect(getByTestId('city').props.children).toBe('New York');
     expect(getByTestId('temp').props.children).toEqual([25, '°C']);
     expect(getByTestId('condition').props.children).toBe('Sunny');
-    expect(getByTestId('image').props.source.uri).toBe('https://example.com/icon.png');
+    expect(getByTestId('image').props.source.uri).toBe(
+      'https://example.com/icon.png',
+    );
   });
 
   it('renders nothing when weather data is null', () => {
@@ -30,22 +32,28 @@ describe('WeatherCard Component', () => {
   });
   it('renders correctly with different weather conditions', () => {
     const weatherConditions = ['Rainy', 'Cloudy', 'Snowy'];
-    weatherConditions.forEach(condition => {
-      const { getByTestId } = render(<WeatherCard weather={{ ...mockWeatherData, condition }} />);
+    weatherConditions.forEach((condition) => {
+      const { getByTestId } = render(
+        <WeatherCard weather={{ ...mockWeatherData, condition }} />,
+      );
       expect(getByTestId('condition').props.children).toBe(condition);
     });
   });
 
   it('renders correctly with extreme temperature values', () => {
     const extremeTemps = [-30, 0, 50];
-    extremeTemps.forEach(temp => {
-      const { getByTestId } = render(<WeatherCard weather={{ ...mockWeatherData, temp }} />);
+    extremeTemps.forEach((temp) => {
+      const { getByTestId } = render(
+        <WeatherCard weather={{ ...mockWeatherData, temp }} />,
+      );
       expect(getByTestId('temp').props.children).toEqual([temp, '°C']);
     });
   });
 
   it('renders correctly with missing icon URL', () => {
-    const { getByTestId } = render(<WeatherCard weather={{ ...mockWeatherData, icon: '' }} />);
+    const { getByTestId } = render(
+      <WeatherCard weather={{ ...mockWeatherData, icon: '' }} />,
+    );
     expect(getByTestId('image').props.source.uri).toBe('');
   });
 });

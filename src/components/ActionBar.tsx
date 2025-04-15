@@ -2,7 +2,6 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { styles } from "./style";
-
 interface ActionBarProps {
   message: string;
   visible: boolean;
@@ -17,7 +16,4 @@ const ActionBar: React.FC<ActionBarProps> = ({ message, visible }) => {
     </View>
   );
 };
-
-
-
 export default ActionBar;
