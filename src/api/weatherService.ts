@@ -5,7 +5,7 @@ import { ICON_URL } from "../utils/constants";
 export const getWeatherByCity = async (city: string): Promise<WeatherData> => {
   try {
     const response = await axiosClient.get("/", {
-      params: { city: city },
+      params: { q: city },
     });
 
     const data = response.data;
