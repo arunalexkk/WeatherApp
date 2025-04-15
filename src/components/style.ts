@@ -1,29 +1,29 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#e53935", // red
+    backgroundColor: '#e53935',
     padding: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    position: "absolute",
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
     top: 0,
-    width: "100%",
+    width: '100%',
     zIndex: 10,
   },
   text: {
-    color: "#fff",
-    fontWeight: "bold",
+    color: '#fff',
+    fontWeight: 'bold',
   },
   card: {
     padding: 20,
-    alignItems: "center",
-    backgroundColor: "#fff",
+    alignItems: 'center',
+    backgroundColor: '#fff',
     borderRadius: 10,
   },
-  city: { 
+  city: {
     fontSize: 22,
-    fontWeight: "bold" 
+    fontWeight: 'bold',
   },
   temp: {
     fontSize: 26,

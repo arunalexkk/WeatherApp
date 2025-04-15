@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { getWeatherByCity } from "../api/weatherService";
-import { WeatherData } from "../types/Weather";
+import { getWeatherByCity } from "../../../api/weatherService";
+import { WeatherData } from "../../../types/Weather";
 
 export const fetchWeather = createAsyncThunk<WeatherData, string, { rejectValue: string }>(
   "weather/fetchWeather",
