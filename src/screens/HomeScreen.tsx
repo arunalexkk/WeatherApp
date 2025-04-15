@@ -1,7 +1,7 @@
 // Description: This is the main screen of the weather app where users can enter a city name and fetch the weather data.
 // It uses Redux for state management and displays the weather information in a card format.
 // This file contains the main screen of the weather app where users can enter a city name and fetch the weather data.
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect, useCallback } from "react";
 import {
   View,
   TextInput,
@@ -14,10 +14,13 @@ import {
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchWeather } from "../redux/weatherActions";
-import { RootState, AppDispatch } from "../store/store";
+import { RootState, AppDispatch } from "../redux/store";
 import WeatherCard from "../components/WeatherCard";
 import { ThemeContext } from "../context/ThemeContext";
 import { darkTheme } from "../styles/theme";
+import { debounce } from "../utils/ debounce";
+import { isValidCityName } from "../utils/helpers";
+import { useNetInfo } from "../hooks/useNetInfo";
 
 const HomeScreen: React.FC = () => {
   const [city, setCity] = useState("");
@@ -26,18 +29,32 @@ const HomeScreen: React.FC = () => {
     (state: RootState) => state.weather
   );
   const { theme, toggleTheme } = useContext(ThemeContext);
-
-  const handleSearch = () => {
-    if (city.trim() === "") {
-      Alert.alert("Please enter a city name");
-      return;
-    }
-    dispatch(fetchWeather(city));
-  };
+  const isConnected = useNetInfo();
+  console.log("Is connected to internet:", isConnected);
+  if (!isConnected) {
+    Alert.alert("No internet connection");
+  }
+  const handleSearch = useCallback(
+    debounce(() => {
+      // if (!isConnected) {
+      //   Alert.alert("No internet connection");
+      //   return;
+      // }
+      if (!isValidCityName(city)) {
+        Alert.alert("Please enter a valid city name");
+        return;
+      }
+      dispatch(fetchWeather(city));
+    }, 800),
+    [city, isConnected]
+  );
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
-      <Text>Enter city name to get weather</Text>
+
+      <Text style={{ color: theme.text }}>
+        Enter a city to get current weather:
+      </Text>
       <TextInput
         testID="city-input"
         style={[
@@ -46,7 +63,7 @@ const HomeScreen: React.FC = () => {
         ]}
         placeholder="Enter city"
         placeholderTextColor={theme.text}
-        onChangeText={setCity}
+        onChangeText={(text) => setCity(text)}
       />
       <Button
         testID="btnWeather"

@@ -1,6 +1,8 @@
+// Description: This file contains the function to fetch weather data from the OpenWeatherMap API.
+
 import axios from "axios";
 import { WeatherData } from "../types/Weather";
-import { API_KEY, BASE_URL, ICON_URL } from "./constants";
+import { API_KEY, BASE_URL, ICON_URL } from "../utils/constants";
 
 export const fetchWeatherFromAPI = async (
   city: string
